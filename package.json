@@ -1,11 +1,13 @@
 {
   "name": "react-mixins-decorator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "用于实现在 react component class(es6风格) 使用 react mixins 特性的类装饰器",
   "main": "index.js",
   "scripts": {
     "debug": "tsc --watch",
     "build": "tsc && node_modules/x-dts-generator/bin/dts-generator --name react-mixins --project ./ --out dist/react-mixins.d.ts --exclude \"{typings/**/*.ts,node_modules/**/*.d.ts,src/test/*.{ts,tsx},src/test/**/*.{ts,tsx}}\"",
+    "prepublish": "npm run build",
+    "deploy": "mocha && npm publish",
     "test": "mocha"
   },
   "repository": {
