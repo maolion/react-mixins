@@ -1,0 +1,38 @@
+{
+  "name": "react-mixins",
+  "version": "0.1.0",
+  "description": "用于实现在 react component class(es6风格) 使用 react mixins 特性的类装饰器",
+  "main": "index.js",
+  "scripts": {
+    "debug": "tsc --watch",
+    "build": "tsc && node_modules/x-dts-generator/bin/dts-generator --name react-mixins --project ./ --out dist/react-mixins.d.ts --exclude \"{typings/**/*.ts,node_modules/**/*.d.ts,src/test/*.{ts,tsx},src/test/**/*.{ts,tsx}}\"",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maolion/react-mixins.git"
+  },
+  "keywords": [
+    "react",
+    "react native",
+    "mixin",
+    "react mixin",
+    "react mixin decorator"
+  ],
+  "author": "maolion.j@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maolion/react-mixins/issues"
+  },
+  "homepage": "https://github.com/maolion/react-mixins#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "typescript": "^1.8.10",
+    "x-dts-generator": "^1.0.5"
+  },
+  "dependencies": {
+    "react": "^15.3.1"
+  },
+  "typings": "dist/react-mixins.d.ts"
+}
