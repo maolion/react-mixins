@@ -1,5 +1,5 @@
 {
-  "name": "react-mixins",
+  "name": "react-mixins-decorator",
   "version": "0.1.0",
   "description": "用于实现在 react component class(es6风格) 使用 react mixins 特性的类装饰器",
   "main": "index.js",
@@ -16,15 +16,16 @@
     "react",
     "react native",
     "mixin",
+    "react decorator",
     "react mixin",
     "react mixin decorator"
   ],
   "author": "maolion.j@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/maolion/react-mixins/issues"
+    "url": "https://github.com/maolion/react-mixins-decorator/issues"
   },
-  "homepage": "https://github.com/maolion/react-mixins#readme",
+  "homepage": "https://github.com/maolion/react-mixins-decorator#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.0.2",
