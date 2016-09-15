@@ -1,5 +1,5 @@
-[![NPM Package](https://badge.fury.io/js/react-mixins.svg)](https://www.npmjs.com/package/react-mixins-decorator)
-[![Build Status](https://travis-ci.org/maolion/react-mixins.svg)](https://travis-ci.org/maolion/react-mixins-decorator)
+[![NPM Package](https://badge.fury.io/js/react-mixins-decorator.svg)](https://www.npmjs.com/package/react-mixins-decorator)
+[![Build Status](https://travis-ci.org/maolion/react-mixins-decorator.svg)](https://travis-ci.org/maolion/react-mixins-decorator)
 
 # React Mixins Decorator
 

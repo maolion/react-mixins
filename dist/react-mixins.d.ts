@@ -1,4 +1,4 @@
 declare module 'react-mixins' {
-	export default function reactMixins(...mixins: any[]): ClassDecorator;
+	export default function reactMixins(mixins: any[]): ClassDecorator;
 
 }
