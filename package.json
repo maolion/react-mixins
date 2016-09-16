@@ -1,6 +1,6 @@
 {
   "name": "react-mixins-decorator",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "用于实现在 react component class(es6风格) 使用 react mixins 特性的类装饰器",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maolion/react-mixins.git"
+    "url": "git+https://github.com/maolion/react-mixins-decorator.git"
   },
   "keywords": [
     "react",
