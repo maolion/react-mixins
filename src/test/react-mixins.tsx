@@ -36,7 +36,8 @@ describe("@reactMixins(...mixins)", () => {
         class TestComponent{
 
         }
-        return true;
+        
+        return (TestComponent as any).mixins.length == 0;
     });
 
     it("单个简单目标对象混合", () => {
@@ -44,7 +45,7 @@ describe("@reactMixins(...mixins)", () => {
         class TestComponent{
 
         }
-        return true;
+        return (TestComponent as any).mixins.indexOf(TargetA) > -1;
     });
     
     it("多个简单目标对象混合", () => {
@@ -52,7 +53,11 @@ describe("@reactMixins(...mixins)", () => {
         class TestComponent{
 
         }
-        return true;
+
+        return (
+            (TestComponent as any).mixins.indexOf(TargetB) > -1 && 
+            (TestComponent as any).mixins.indexOf(TargetA) > -1
+        );
     });
 
     it("多数量/多层依赖目标对象混合", () => {
@@ -60,7 +65,10 @@ describe("@reactMixins(...mixins)", () => {
         class TestComponent{
 
         }
-        return true;
+        return (
+            (TestComponent as any).mixins.indexOf(TargetB) > -1 && 
+            (TestComponent as any).mixins.indexOf(TargetA) > -1
+        );
     });
 });
 

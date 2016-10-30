@@ -17,13 +17,14 @@ else if (typeof global != 'undefined') {
 }
 function reactMixins(mixins) {
     return (DecoratedComponent) => {
+        mixins = mixins || [];
         class ReactMixinsDecorator extends react_1.Component {
             render() {
                 return React.createElement(DecoratedComponent, __assign({}, this.props));
             }
         }
         ReactMixinsDecorator.propTypes = DecoratedComponent.propTypes;
-        mixins = mixins || [];
+        ReactMixinsDecorator.mixins = mixins.slice();
         const prototype = DecoratedComponent.prototype;
         const newPrototype = {};
         for (let source of mixins) {

@@ -40,7 +40,7 @@ describe("@reactMixins(...mixins)", () => {
         TestComponent = __decorate([
             index_1.default(null)
         ], TestComponent);
-        return true;
+        return TestComponent.mixins.length == 0;
     });
     it("单个简单目标对象混合", () => {
         let TestComponent = class TestComponent {
@@ -48,7 +48,7 @@ describe("@reactMixins(...mixins)", () => {
         TestComponent = __decorate([
             index_1.default([TargetA])
         ], TestComponent);
-        return true;
+        return TestComponent.mixins.indexOf(TargetA) > -1;
     });
     it("多个简单目标对象混合", () => {
         let TestComponent = class TestComponent {
@@ -56,7 +56,8 @@ describe("@reactMixins(...mixins)", () => {
         TestComponent = __decorate([
             index_1.default([TargetA, TargetB])
         ], TestComponent);
-        return true;
+        return (TestComponent.mixins.indexOf(TargetB) > -1 &&
+            TestComponent.mixins.indexOf(TargetA) > -1);
     });
     it("多数量/多层依赖目标对象混合", () => {
         let TestComponent = class TestComponent {
@@ -64,7 +65,8 @@ describe("@reactMixins(...mixins)", () => {
         TestComponent = __decorate([
             index_1.default([TargetA, TargetD])
         ], TestComponent);
-        return true;
+        return (TestComponent.mixins.indexOf(TargetB) > -1 &&
+            TestComponent.mixins.indexOf(TargetA) > -1);
     });
 });
 describe('混合结果使用测试', () => {

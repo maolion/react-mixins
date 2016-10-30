@@ -9,15 +9,17 @@ if (typeof window != 'undefined') {
 
 export default function reactMixins(mixins: any[]):ClassDecorator {
     return (DecoratedComponent: any) => {
+        mixins = mixins || [];
+
         class ReactMixinsDecorator extends Component<any, any> {
             static propTypes = DecoratedComponent.propTypes;
+            static mixins = mixins.slice();
 
             render() {
                 return <DecoratedComponent {...this.props}/>
             }
         }
 
-        mixins = mixins || [];
         const prototype: any = DecoratedComponent.prototype;
         const newPrototype: any = {};
         

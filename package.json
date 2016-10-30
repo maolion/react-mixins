@@ -1,6 +1,6 @@
 {
   "name": "react-mixins-decorator",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "用于实现在 react component class(es6风格) 使用 react mixins 特性的类装饰器",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -31,12 +31,12 @@
   "homepage": "https://github.com/maolion/react-mixins-decorator#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.0.2",
-    "typescript": "^2.0.0",
+    "mocha": "^3.1.2",
+    "typescript": "^2.0.6",
     "x-dts-generator": "^1.0.6"
   },
   "dependencies": {
-    "react": "^15.3.1",
+    "react": "^15.3.2",
     "typescript": "^2.0.2"
   }
 }
