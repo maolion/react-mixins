@@ -1,6 +1,6 @@
 {
   "name": "react-mixins-decorator",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "用于实现在 react component class(es6风格) 使用 react mixins 特性的类装饰器",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",

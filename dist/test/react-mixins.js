@@ -132,4 +132,29 @@ describe('混合结果使用测试', () => {
             "TestComponent.method1"
         ].join(',');
     });
+    it("同名方法返回值", () => {
+        let result = [];
+        const TargetA = {
+            method1: function () {
+                return 1;
+            }
+        };
+        const TargetB = {
+            method1: function () {
+                return 2;
+            }
+        };
+        let TestComponent = class TestComponent {
+            constructor() {
+            }
+            method1() {
+                return 3;
+            }
+        };
+        TestComponent = __decorate([
+            index_1.default([TargetA, TargetB])
+        ], TestComponent);
+        var obj = createInstance(TestComponent);
+        return obj.method1() === 3;
+    });
 });

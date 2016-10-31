@@ -43,9 +43,11 @@ function reactMixins(mixins) {
             if (newPrototype[methodName] instanceof MixinStack) {
                 const methods = newPrototype[methodName].list;
                 prototype[methodName] = function () {
+                    let result = null;
                     for (let method of methods) {
-                        method.apply(this, arguments);
+                        result = method.apply(this, arguments);
                     }
+                    return result;
                 };
             }
             else {
