@@ -26,7 +26,7 @@ import { Component } from 'react';
 import reactMixins from 'react-mixins-decorator';
 
 
-@reactMixins(MixinTargetA[, MixinTargetB, MixinTargetC, ....])
+@reactMixins([MixinTargetA, MixinTargetB, MixinTargetC, ....])
 class TargetComponent extends Component {
     ....
 }
