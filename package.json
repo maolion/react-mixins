@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
-    "devlop": "tsc -v && tsc --watch",
+    "start": "tsc -v && tsc --watch",
     "build": "tsc -v && tsc && node_modules/.bin/dts-generator --name react-mixins-decorator --project ./ --out dist/index.d.ts --exclude \"{typings/**/*.ts,node_modules/**/*.d.ts,src/test/*.{ts,tsx},src/test/**/*.{ts,tsx}}\"",
     "prepublish": "rimraf dist && npm run build",
     "deploy": "mocha && npm publish",
@@ -30,6 +30,10 @@
   },
   "homepage": "https://github.com/maolion/react-mixins-decorator#readme",
   "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.32",
+    "@types/react": "^0.14.44",
+    "@types/react-native": "^0.34.38",
     "chai": "^3.5.0",
     "mocha": "^3.1.2",
     "rimraf": "^2.5.4",
