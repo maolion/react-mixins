@@ -15,6 +15,35 @@ export default function reactMixins(mixins: any[]):ClassDecorator {
             static propTypes = DecoratedComponent.propTypes;
             static mixins = mixins.slice();
 
+            shouldComponentUpdate(nextProps: any, nextState: any) {
+                const currentProps = this.props;
+                const currentState = this.state;
+                
+                if (Object.keys(currentProps).length != Object.keys(nextProps).length ||
+                    Object.keys(currentState).length != Object.keys(nextState).length
+                ) {
+                    return true;
+                }
+
+                for (const key in nextProps) {
+                    if (currentProps[key] !== nextProps[key] ||
+                        typeof nextProps[key] === 'object'
+                    ) {
+                        return true;
+                    }
+                }
+
+                for (const key in nextState) {
+                    if (currentState[key] !== nextState[key] ||
+                        typeof nextState[key] === 'object'
+                    ) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
             render() {
                 return <DecoratedComponent {...this.props}/>
             }
