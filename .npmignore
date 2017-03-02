@@ -5,3 +5,4 @@ node_modules/
 tsconfig.json
 typings.json
 test/
+dist/typings/test/
