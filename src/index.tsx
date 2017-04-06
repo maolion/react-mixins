@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 
-export default function reactMixins(mixins: any[]): ClassDecorator {
+export default function reactMixins(mixins: any[]|undefined): ClassDecorator {
   return (DecoratedComponent: any) => {
-    mixins = mixins || [];
+    let safeMixins = mixins || [];
 
     class ReactMixinsDecorator extends PureComponent<any, any> {
       static propTypes = DecoratedComponent.propTypes;
-      static mixins = mixins.slice();
+      static mixins = safeMixins.slice();
 
       render() {
         return <DecoratedComponent {...this.props} />
@@ -17,7 +17,7 @@ export default function reactMixins(mixins: any[]): ClassDecorator {
     const prototype: any = DecoratedComponent.prototype;
     const newPrototype: any = {};
 
-    for (let source of mixins) {
+    for (let source of safeMixins) {
       mixin(newPrototype, source);
     }
 
@@ -36,11 +36,12 @@ export default function reactMixins(mixins: any[]): ClassDecorator {
 
       if (newPrototype[methodName] instanceof MixinStack) {
         const methods = newPrototype[methodName].list;
+
         prototype[methodName] = function () {
           let result: any;
-
+          let _this = eval('this');
           for (let method of methods) {
-            result = method.apply(this, arguments);
+            result = method.apply(_this, arguments);
           }
 
           return result;

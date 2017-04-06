@@ -22,7 +22,7 @@ const TargetC = {
 const TargetD = {
   mixins: [TargetC],
   method4() {
-    return this;
+    return eval('this');
   }
 }
 
