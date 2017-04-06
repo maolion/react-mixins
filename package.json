@@ -1,13 +1,15 @@
 {
   "name": "react-mixins-decorator",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "用于实现在 react component class(es6风格) 使用 react mixins 特性的类装饰器",
   "main": "./dist/index.js",
   "typings": "./dist/typings/index.d.ts",
   "scripts": {
-    "start": "tsc -v && tsc --watch",
-    "build": "tsc -v && tsc -d --declarationDir dist/typings",
-    "prepublish": "rimraf dist && npm run build",
+    "start": "tsc --watch",
+    "tslint": "tslint",
+    "lint": "tslint src/**/*.ts -c tslint.json",
+    "build": "npm run lint && tsc --declaration",
+    "prepublishOnly": "rimraf dist && npm run build",
     "deploy": "mocha && npm publish",
     "test": "mocha"
   },
