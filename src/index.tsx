@@ -1,97 +1,93 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
 
-if (typeof window != 'undefined') {
-    (window as any).React = React;
-} else if (typeof global != 'undefined') {
-    (global as any).React = React;
-}
+export default function reactMixins(mixins: any[]): ClassDecorator {
+  return (DecoratedComponent: any) => {
+    mixins = mixins || [];
 
-export default function reactMixins(mixins: any[]):ClassDecorator {
-    return (DecoratedComponent: any) => {
-        mixins = mixins || [];
+    class ReactMixinsDecorator extends PureComponent<any, any> {
+      static propTypes = DecoratedComponent.propTypes;
+      static mixins = mixins.slice();
 
-        class ReactMixinsDecorator extends PureComponent<any, any> {
-            static propTypes = DecoratedComponent.propTypes;
-            static mixins = mixins.slice();
+      render() {
+        return <DecoratedComponent {...this.props} />
+      }
+    }
 
-            render() {
-                return <DecoratedComponent {...this.props}/>
-            }
+    const prototype: any = DecoratedComponent.prototype;
+    const newPrototype: any = {};
+
+    for (let source of mixins) {
+      mixin(newPrototype, source);
+    }
+
+    Object.keys(newPrototype).forEach((methodName) => {
+      const method = newPrototype[methodName];
+
+      if (prototype[methodName] instanceof Function) {
+        const originMethod = prototype[methodName];
+        if (!(method instanceof MixinStack)) {
+          newPrototype[methodName] = new MixinStack();
+          newPrototype[methodName].list.push(method);
         }
 
-        const prototype: any = DecoratedComponent.prototype;
-        const newPrototype: any = {};
-        
-        for (let source of mixins) {
-            mixin(newPrototype, source);
-        }
-        
-        Object.keys(newPrototype).forEach((methodName) => {
-            const method = newPrototype[methodName];
+        newPrototype[methodName].list.push(originMethod);
+      }
 
-            if (prototype[methodName] instanceof Function) {
-                const originMethod = prototype[methodName];
-                if (!(method instanceof MixinStack)) {
-                    newPrototype[methodName] = new MixinStack();
-                    newPrototype[methodName].list.push(method);
-                }
+      if (newPrototype[methodName] instanceof MixinStack) {
+        const methods = newPrototype[methodName].list;
+        prototype[methodName] = function () {
+          let result: any;
 
-               newPrototype[methodName].list.push(originMethod);
-            }
+          for (let method of methods) {
+            result = method.apply(this, arguments);
+          }
 
-            if (newPrototype[methodName] instanceof MixinStack) {
-                const methods = newPrototype[methodName].list;
-                prototype[methodName] = function() {
-                    let result:any = null;
-                    for (let method of methods) {
-                        result = method.apply(this, arguments);
-                    }
-                    return result;
-                };
-            } else {
-                prototype[methodName] = newPrototype[methodName];
-            }
-        });
-        return ReactMixinsDecorator;
-    };
+          return result;
+        };
+      } else {
+        prototype[methodName] = newPrototype[methodName];
+      }
+    });
+    return ReactMixinsDecorator;
+  };
 }
 
 class MixinStack {
-    list: Function[];
-    constructor() {
-        this.list = [];
-    }
+  list: Function[];
+  constructor() {
+    this.list = [];
+  }
 }
 
 function mixin(dest: any, source: any) {
-    if (!source) {
-        return;
-    }
+  if (!source) {
+    return;
+  }
 
-    if (source.mixins && source.mixins.length) {
-        for (let next of source.mixins) {
-            mixin(dest, next);
-        }
+  if (source.mixins && source.mixins.length) {
+    for (let next of source.mixins) {
+      mixin(dest, next);
     }
+  }
 
-    Object.keys(source).forEach((methodName) => {
-        const method = source[methodName];
-        if (!(method instanceof Function)) {
-            return;
-        }
-        if (dest[methodName]) {
-            if (dest[methodName] instanceof Function) {
-                const originMethod = dest[methodName];
-                dest[methodName] = new MixinStack();
-                dest[methodName].list.push(originMethod);
-            }
-            
-            if (dest[methodName] instanceof MixinStack) {
-                dest[methodName].list.push(method);
-            }
-        } else {
-            dest[methodName] = method;
-        }
-    });
+  Object.keys(source).forEach((methodName) => {
+    const method = source[methodName];
+    if (!(method instanceof Function)) {
+      return;
+    }
+    if (dest[methodName]) {
+      if (dest[methodName] instanceof Function) {
+        const originMethod = dest[methodName];
+        dest[methodName] = new MixinStack();
+        dest[methodName].list.push(originMethod);
+      }
+
+      if (dest[methodName] instanceof MixinStack) {
+        dest[methodName].list.push(method);
+      }
+    } else {
+      dest[methodName] = method;
+    }
+  });
 }

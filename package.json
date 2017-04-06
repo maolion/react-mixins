@@ -33,11 +33,12 @@
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.32",
     "@types/react": "^0.14.44",
-    "@types/react-native": "^0.34.38",
     "chai": "^3.5.0",
     "mocha": "^3.1.2",
     "rimraf": "^2.5.4",
-    "typescript": "^2.2.1"
+    "tslint": "^5.0.0",
+    "typescript": "^2.2.2",
+    "vts": "^5.0.1"
   },
   "dependencies": {
     "react": "^15.3.2"
