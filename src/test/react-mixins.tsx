@@ -39,7 +39,8 @@ describe('@reactMixins(...mixins)', () => {
 
     }
 
-    return (TestComponent as any).mixins.length === 0;
+    expect((TestComponent as any).mixins.length)
+      .to.be.equal(0);
   });
 
   it('单个简单目标对象混合', () => {
@@ -47,7 +48,9 @@ describe('@reactMixins(...mixins)', () => {
     class TestComponent {
 
     }
-    return (TestComponent as any).mixins.indexOf(TargetA) > -1;
+
+    expect((TestComponent as any).mixins.indexOf(TargetA) > -1)
+      .to.be.equal(true);
   });
 
   it('多个简单目标对象混合', () => {
@@ -56,21 +59,11 @@ describe('@reactMixins(...mixins)', () => {
 
     }
 
-    return (
+    expect(
       (TestComponent as any).mixins.indexOf(TargetB) > -1 &&
       (TestComponent as any).mixins.indexOf(TargetA) > -1
-    );
-  });
-
-  it('多数量/多层依赖目标对象混合', () => {
-    @reactMixins([TargetA, TargetD])
-    class TestComponent {
-
-    }
-    return (
-      (TestComponent as any).mixins.indexOf(TargetB) > -1 &&
-      (TestComponent as any).mixins.indexOf(TargetA) > -1
-    );
+    )
+      .to.be.equal(true);
   });
 });
 
@@ -83,7 +76,8 @@ describe('混合结果使用测试', () => {
       }
     }
 
-    return createInstance(TestComponent);
+    expect(typeof createInstance(TestComponent))
+      .to.be.equal('object');
   });
 
   it('在类实例中调用多混合目标对象的方法', () => {
@@ -96,7 +90,9 @@ describe('混合结果使用测试', () => {
         expect((this as any).method4()).to.be.equal(this);
       }
     }
-    return createInstance(TestComponent);
+
+    expect(!!createInstance(TestComponent))
+      .to.be.equal(true);
   });
   it('同名方法的调用', () => {
     let result: any = [];
@@ -129,12 +125,13 @@ describe('混合结果使用测试', () => {
 
     let obj = createInstance(TestComponent);
 
-    return result.join(',') === [
+    expect(result.join(','))
+      .to.be.equal([
       'TargetA.method1',
       'TargetB.method1',
       'TargetC.method1',
       'TestComponent.method1'
-    ].join(',');
+    ].join(','));
   });
 
   it('同名方法返回值', () => {
@@ -163,6 +160,7 @@ describe('混合结果使用测试', () => {
 
     let obj = createInstance(TestComponent);
 
-    return obj.method1() === 3;
+    expect(obj.method1() === 3)
+      .to.be.equal(true);
   });
 });
