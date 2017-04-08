@@ -51,6 +51,7 @@ export default function reactMixins(mixins: any[]|undefined): ClassDecorator {
         prototype[methodName] = newPrototype[methodName];
       }
     });
+
     return ReactMixinsDecorator;
   };
 }
