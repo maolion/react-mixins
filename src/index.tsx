@@ -6,12 +6,13 @@ export default function reactMixins(mixins: any[]|undefined): ClassDecorator {
     let safeMixins = mixins || [];
 
     class ReactMixinsDecorator extends PureComponent<any, any> {
-      static propTypes = DecoratedComponent.propTypes;
-      static mixins = safeMixins.slice();
 
       render() {
-        return <DecoratedComponent {...this.props} />
+        return <DecoratedComponent {...this.props} />;
       }
+
+      static propTypes = DecoratedComponent.propTypes;
+      static mixins = safeMixins.slice();
     }
 
     const prototype: any = DecoratedComponent.prototype;
@@ -21,7 +22,7 @@ export default function reactMixins(mixins: any[]|undefined): ClassDecorator {
       mixin(newPrototype, source);
     }
 
-    Object.keys(newPrototype).forEach((methodName) => {
+    Object.keys(newPrototype).forEach(methodName => {
       const method = newPrototype[methodName];
 
       if (prototype[methodName] instanceof Function) {
@@ -72,7 +73,7 @@ function mixin(dest: any, source: any) {
     }
   }
 
-  Object.keys(source).forEach((methodName) => {
+  Object.keys(source).forEach(methodName => {
     const method = source[methodName];
     if (!(method instanceof Function)) {
       return;
